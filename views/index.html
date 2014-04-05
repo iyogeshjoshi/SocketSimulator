@@ -16,14 +16,12 @@
 <section ng-controller="StockCtrl" class="container">
     <h1>Simple Stock Simulator</h1>
 
-    <h2>{{ title }}</h2>
-
     <div class="well">
         <div>
             <select name="chartType" ng-model="chartConfig.options.chart.type">
                 <option value="line">Line</option>
                 <option value="spline">Smooth line</option>
-                <option value="bar">Bar</option>
+                <option value="candlestick">Candlestick</option>
                 <option value="column">Column</option>
                 <option value="area">Area</option>
                 <option value="areaspline">Area Spline</option>
@@ -46,30 +44,38 @@
             <thead>
             <tr>
                 <th>Symbol</th>
+                <th>Name</th>
+                <th>Change (₹)</th>
                 <th>Change (%)</th>
                 <th>Price</th>
                 <th>High</th>
                 <th>Low</th>
-                <th>Compare</th>
+                <th>Comparison</th>
             </tr>
             </thead>
             <tbody>
             <tr data-ng-repeat="company in companies"
                 ng-class="{success: (company.data[company.data.length - 1].change > 0), danger: (company.data[company.data.length - 1].change <= 0)}">
                 <td>{{ company.ticker }}</td>
-                <td>{{ company.data[company.data.length - 1].change | number:2| currency:"₹" }}
-                    ( {{ company.data[company.data.length - 1].changeper | number:2 }} )
-                    <i class="glyphicon glyphicon-chevron-up text-success"
+                <td>{{ company.name }}</td>
+                <td>{{ company.data[company.data.length - 1].change | number:2| currency:"₹" }}</td>
+                <td>
+                    &nbsp;{{ company.data[company.data.length - 1].changeper | number:2 }}
+                    <i class="glyphicon glyphicon-chevron-up text-success pull-left"
                        ng-show="company.data[company.data.length - 1].change > 0"></i>
-                    <i class="glyphicon glyphicon-chevron-down text-danger"
+                    <i class="glyphicon glyphicon-chevron-down text-danger pull-left"
                        ng-show="company.data[company.data.length - 1].change <= 0"></i>
                 </td>
                 <td>{{ company.data[company.data.length - 1].price| currency:"₹" }}</td>
                 <td>{{ company.data[company.data.length - 1].high| currency:"₹" }}</td>
                 <td>{{ company.data[company.data.length - 1].low| currency:"₹" }}</td>
                 <td>
-                    <button class="btn" ng-show="!chartConfig.series[$index].visible" data-ng-click="makeVisible($index)">Compare</button>
-                    <button class="btn" ng-show="chartConfig.series[$index].visible" data-ng-click="makeInvisible($index)">Remove</button>
+                    <button class="btn" ng-show="!chartConfig.series[$index].visible"
+                            data-ng-click="makeVisible($index)"><i class="glyphicon glyphicon-ok"></i>
+                    </button>
+                    <button class="btn" ng-show="chartConfig.series[$index].visible"
+                            data-ng-click="makeInvisible($index)"><i class="glyphicon glyphicon-remove"></i>
+                    </button>
                 </td>
             </tr>
             </tbody>
@@ -91,8 +97,8 @@
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 <script>
-    var serverIp = '192.168.2.106';
-    var socket = io.connect('http://' + serverIp + ':3000');
+    var serverIp = '107.21.216.112';
+    var socket = io.connect();
 </script>
 
 <!-- controllers & routers -->

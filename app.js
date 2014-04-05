@@ -11,7 +11,7 @@ var io = require('socket.io');
 var MarketController = require('./routes/marketCtrl');
 
 var app = express();
-var serverIp = '192.168.2.106';
+var serverIp = '107.21.216.112';
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -67,7 +67,7 @@ app.get('/users', user.list);
 var server = http.createServer(app);
 io = io.listen(server);
 MarketController.io(io);
-server.listen(app.get('port'), serverIp, function () {
+server.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 // on connection send list of all companies

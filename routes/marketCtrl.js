@@ -11,21 +11,6 @@ var _ = require('underscore');
 var companies, changePriceInterval, io;
 
 // set sample data
-//companies = [
-//    {
-//        name: "Google Inc.",
-//        ticker: "GOOG",
-//        price: 1000.00,
-//        high: 1000.00,
-//        low: 1000.00,
-//        closed: 1000.0,
-//        change: 0.00,
-//        changeper: 0.00,
-//        buy: 5000,
-//        sell: 5000,
-//        time: new Date().valueOf()
-//    }
-//];
 companies = [
     {
         name: "Google Inc.",
@@ -59,6 +44,42 @@ companies = [
                 changeper: 0.00,
                 buy: 5000,
                 sell: 15000,
+                time: new Date().valueOf()
+            }
+        ]
+    },
+    {
+        name: "Samsung Inc.",
+        ticker: "SAMG",
+        data: [
+            {
+                price: 700.00,
+                high: 700.00,
+                low: 700.00,
+                closed: 700.0,
+                open: 700.0,
+                change: 0.00,
+                changeper: 0.00,
+                buy: 7000,
+                sell: 13000,
+                time: new Date().valueOf()
+            }
+        ]
+    },
+    {
+        name: "Nokia Pvt. Ltd.",
+        ticker: "NOKI",
+        data: [
+            {
+                price: 650.00,
+                high: 650.00,
+                low: 650.00,
+                closed: 650.0,
+                open: 650.0,
+                change: 0.00,
+                changeper: 0.00,
+                buy: 5500,
+                sell: 11000,
                 time: new Date().valueOf()
             }
         ]

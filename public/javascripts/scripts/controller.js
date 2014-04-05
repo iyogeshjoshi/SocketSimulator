@@ -79,6 +79,37 @@ stockApp.controller('StockCtrl', function ($scope) {
                     month: '%b \'%y',
                     year: '%Y'
                 }
+            },
+            plotOptions: {
+                candlestick: {
+                    dataGrouping: {
+                        enabled: true,
+                        forced: true,
+                        smoothed: true
+                    },
+                    marker: {
+                        enabled: true
+                    },
+                    visible: true
+                },
+                column: {
+                    stacking: 'normal',
+                    grouping: true
+                },
+                line: {
+                    dataGrouping: {
+                        enabled: true,
+                        forced: true,
+                        smoothed: true
+                    }
+                },
+                spline: {
+                    dataGrouping: {
+                        enabled: true,
+                        forced: true,
+                        smoothed: true
+                    }
+                }
             }
         },
         useHighStocks: true,
@@ -206,14 +237,14 @@ stockApp.controller('StockCtrl', function ($scope) {
     $scope.makeVisible = function (seriesIndex) {
         console.log('visible called');
 //        $scope.$apply(function(){
-            $scope.chartConfig.series[seriesIndex].visible = true;
+        $scope.chartConfig.series[seriesIndex].visible = true;
 //        })
     }
 
     $scope.makeInvisible = function (seriesIndex) {
         console.log('visible called');
 //        $scope.$apply(function(){
-            $scope.chartConfig.series[seriesIndex].visible = false;
+        $scope.chartConfig.series[seriesIndex].visible = false;
 //        })
     }
 
