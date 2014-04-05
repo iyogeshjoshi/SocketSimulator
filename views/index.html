@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="stockApp" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Stock Simulator</title>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="javascripts/bootstrap/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<!-- Navigation bar -->
+<nav></nav>
+<!-- content section -->
+<section ng-controller="StockCtrl" class="container">
+    <h1>Simple Stock Simulator</h1>
+
+    <h2>{{ title }}</h2>
+
+    <div class="well">
+        <div>
+            <select name="chartType" ng-model="chartConfig.options.chart.type">
+                <option value="line">Line</option>
+                <option value="spline">Smooth line</option>
+                <option value="bar">Bar</option>
+                <option value="column">Column</option>
+                <option value="area">Area</option>
+                <option value="areaspline">Area Spline</option>
+            </select>
+        </div>
+
+        <!--<div>
+            <input ng-model="chartConfig.title.text">
+            <button ng-click="addSeries()">Add Series</button>
+            <button ng-click="addPoints()">Add Points to Random Series</button>
+            <button ng-click="removeRandomSeries()">Remove Random Series</button>
+            <button ng-click="swapChartType()">Line/Bar</button>
+            <button ng-click="toggleLoading()">Loading?</button>
+        </div>-->
+        <highchart id="chart" config="chartConfig"></highchart>
+    </div>
+    <div></div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped table-condensed">
+            <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Change (%)</th>
+                <th>Price</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Compare</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="company in companies"
+                ng-class="{success: (company.data[company.data.length - 1].change > 0), danger: (company.data[company.data.length - 1].change <= 0)}">
+                <td>{{ company.ticker }}</td>
+                <td>{{ company.data[company.data.length - 1].change | number:2| currency:"₹" }}
+                    ( {{ company.data[company.data.length - 1].changeper | number:2 }} )
+                    <i class="glyphicon glyphicon-chevron-up text-success"
+                       ng-show="company.data[company.data.length - 1].change > 0"></i>
+                    <i class="glyphicon glyphicon-chevron-down text-danger"
+                       ng-show="company.data[company.data.length - 1].change <= 0"></i>
+                </td>
+                <td>{{ company.data[company.data.length - 1].price| currency:"₹" }}</td>
+                <td>{{ company.data[company.data.length - 1].high| currency:"₹" }}</td>
+                <td>{{ company.data[company.data.length - 1].low| currency:"₹" }}</td>
+                <td>
+                    <button class="btn" ng-show="!chartConfig.series[$index].visible" data-ng-click="makeVisible($index)">Compare</button>
+                    <button class="btn" ng-show="chartConfig.series[$index].visible" data-ng-click="makeInvisible($index)">Remove</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- footer section -->
+<footer></footer>
+
+<!-- scripts -->
+<script type="text/javascript" src="javascripts/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="javascripts/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascripts/angular/angular.min.js"></script>
+<script type="text/javascript" src="javascripts/Highcharts/highstock.src.js"></script>
+<!--<script type="text/javascript" src="javascripts/Highcharts/js/highcharts.src.js"></script>-->
+<script type="text/javascript" src="javascripts/Highstocks/js/highstocks.js"></script>
+<!--<script type="text/javascript" src="http://code.highcharts.com/stock/highstock.js"></script>-->
+<script type="text/javascript" src="javascripts/highcharts-ng/dist/highcharts-ng.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<script>
+    var serverIp = '192.168.2.106';
+    var socket = io.connect('http://' + serverIp + ':3000');
+</script>
+
+<!-- controllers & routers -->
+<script type="text/javascript" src="javascripts/scripts/router.js"></script>
+<script type="text/javascript" src="javascripts/scripts/controller.js"></script>
+</body>
+</html>

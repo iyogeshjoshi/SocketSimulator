@@ -1,0 +1,27 @@
+{
+  "name": "StockSimulator",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "ejs": "*",
+    "socket.io": "^0.9.16",
+    "gekko": "0.0.4",
+    "underscore": "^1.6.0"
+  },
+  "description": "Simulation of stock market",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [
+    "stock",
+    "simulator"
+  ],
+  "author": {
+    "name": "Yogesh Joshi",
+    "email": "yogeshjoshi208@gmail.com"
+  },
+  "license": "BSD"
+}
