@@ -6,9 +6,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.8",
+    "express": "4.22.0",
     "ejs": "*",
-    "socket.io": "^0.9.16",
+    "socket.io": "^4.8.4",
     "gekko": "0.0.4",
     "underscore": "^1.6.0"
   },
